@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/user">View User</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Add User</a>
+        </li>
      
       </ul>
       
@@ -24,6 +27,7 @@
   </div>
 </nav>
 <div>
+<p th:text= "${msg}" class="text-success"></p>
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
@@ -48,9 +52,9 @@
 			<td th:text="${user.Gender}"></td>
 			<td th:text="${user.DOB}"></td>
 			<td th:text="${user.SSN}"></td>
-			<!--<td><a href="/edit/${user.userid}" class="btn btn-success">Edit</a></td>
-			<td><a href="//delete/{userid}" class="btn btn-danger">Delete</a></td>-->
-			<td><a class="btn btn-info" th:href="@{/edit/{userid}(userid=${user.userid})}">Edit</a></td>
+			<td><a th:href="@{/edit?(id=${user.userid})}" class="btn btn-success">Edit</a></td>
+			<td><a th:href="@{/delete?(id=${user.userid})}" class="btn btn-danger">Delete</a></td>
+			<!--<td><a class="btn btn-info" th:href="@{/edit/{userid}(userid=${user.userid})}">Edit</a></td>
             <td><a class="btn btn-danger" th:href="@{/delete/{userid}(userid=${user.userid})}">Delete</a></td>
 	       <td>
       <form th:action="@{/toggleActivation}" method="post">
@@ -65,7 +69,7 @@
           </span>
        </form>
 
-                    <!--<form th:action="@{/toggleActivation}" method="post">
+                    <form th:action="@{/toggleActivation}" method="post">
                         <input type="hidden" name="userId" th:value="${user.userid}" />
                         <span th:switch="${user.Active_Sw}">
                         <i> th:case="Y" class="fas fa-check red-text">
@@ -75,15 +79,15 @@
                         </span>
                     </form>-->
                 </td>
-	        <!--<span th:switch="${user.Active_Sw}">
+	        <span th:switch="${user.Active_Sw}">
   <i th:case="Y" class="fas fa-check red-text">
-	  <td><a href="#" class="btn btn-danger">De-Activate</a></td>
+	  <td><a th:href="@{/update?(id=${user.userid},status=N)}" class="btn btn-danger">De-Activate</a></td>
   </i>
   <i th:case="N" class="fas fa-times orange-text">
-	  <td><a href="#" class="btn btn-success">Activate</a></td>
+	  <td><a th:href="@{/update?(id=${user.userid},status=Y)}" class="btn btn-success">Activate</a></td>
   </i>
  
-</span>-->
+</span>
 			
 		</tr>
 	</tbody>

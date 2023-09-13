@@ -13,6 +13,6 @@ public interface UserRepo extends JpaRepository<UserAccount,Integer> {
 	@Modifying
 	@Transactional
 	@Query("update UserAccount set Active_Sw=:status where userId=:userId")
-	public boolean updateUserAccStatus(Integer userId, String status);
+	public void updateUserAccStatus(Integer userId, String status);
 
 }

@@ -24,7 +24,7 @@ public class UserServiceImp implements UserService{
 			return "Record Saved Successfuly";
 		}
 		else{
-			return "Record upadted";
+			return "Record updated Successfully";
 		}
 		
 	}
@@ -53,23 +53,23 @@ public class UserServiceImp implements UserService{
 		
 		return false;
 	}
-	public void toggleUserActivation(Integer id) {
-        UserAccount user = getUserAcc(id);
-        if (user != null) {
-            // Toggle the active state between "Y" and "N"
-            user.setActive_Sw(user.getActive_Sw().equals("Y") ? "N" : "Y");
-            up.save(user); // Update the user in the database
-        }
-    
-//	@Override
-//	public boolean updateUserAccStatus(Integer userId, String status) {
-//		try {
-//		up.updateUserAccStatus(userId, status);
-//		return true;
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		return false;
+//	public void toggleUserActivation(Integer id) {
+//        UserAccount user = getUserAcc(id);
+//        if (user != null) {
+//            // Toggle the active state between "Y" and "N"
+//            user.setActive_Sw(user.getActive_Sw().equals("Y") ? "N" : "Y");
+//            up.save(user); // Update the user in the database
+//        }
+//    
+	@Override
+	public boolean updateUserAccStatus(Integer userId, String status) {
+		try {
+		up.updateUserAccStatus(userId, status);
+		return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

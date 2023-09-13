@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.entity.UserAccount;
 import com.spring.service.UserServiceImp;
@@ -36,6 +35,7 @@ public String handleSubmitBtn(@ModelAttribute("user") UserAccount userAcc, Model
 	
 	String msg= uI.saveOrUpdateUserAcc(userAcc);
 	model.addAttribute("msg", msg);
+	model.addAttribute("user", new UserAccount());
 	return "index";
 	
 }
@@ -51,37 +51,46 @@ public String viewUsers(Model model) {
 //	   return "index";
 //	 
 // }
-@GetMapping("/edit/{userid}")
-public String editUserForm(@PathVariable("userid") Integer userId, Model model) {
+@GetMapping("/edit")
+public String editUserForm(@RequestParam("id") Integer userId, Model model) {
   UserAccount userAcc = uI.getUserAcc(userId);
  model.addAttribute("user", userAcc);
-    return "edit";
+    return "index";
 }
 
-@PostMapping("/edit/{userid}")
-public String editUser(@ModelAttribute("user") UserAccount userAcc, Model model) {
-    uI.saveOrUpdateUserAcc(userAcc);
-    return "redirect:/user/";
-}
+//@PostMapping("/edit/{userid}")
+//public String editUser(@ModelAttribute("user") UserAccount userAcc, Model model) {
+//    uI.saveOrUpdateUserAcc(userAcc);
+//    return "redirect:/user/";
+//}
 
-@GetMapping("/delete/{userid}")
-public String deleteUser(@PathVariable("userid") Integer userId) {
+@GetMapping("/delete")
+public String deleteUser(@RequestParam("id") Integer userId,Model model) {
     uI.deleteUserAcc(userId);
-    return "redirect:/user/";
+    model.addAttribute("msg","User Deleted Successfully");
+    return "forward:/user";
 }
-@PostMapping("/toggleActivation")
-public String toggleActivation(Integer userId) {
-    uI.toggleUserActivation(userId);
-    return "redirect:/user/";
-}
+//@PostMapping("/toggleActivation")
+//public String toggleActivation(Integer userId) {
+//    uI.toggleUserActivation(userId);
+//    return "redirect:/user/";
+//}
 //
 // public String deleteUser(Integer userId, Model model) {
 //	return "list";
 //	 
 // }
 //
-//public String changeAccStatus(Integer userId, String status) {
-//	return status;
-//
-//}
+@GetMapping("/update")
+public String changeAccStatus(@RequestParam("id") Integer userId,@RequestParam("status") String status,Model model) {
+	uI.updateUserAccStatus(userId, status);
+	if("Y".equals(status)) {
+		model.addAttribute("msg","User Activated Successfully");
+	}else {
+		model.addAttribute("msg","User De-Activated Successfully");
+	}
+	
+	return "forward:/user";
+
+}
 }

@@ -14,5 +14,5 @@ public interface UserService {
 
 	 public boolean deleteUserAcc(Integer userId);
 
-	 //public boolean updateUserAccStatus(Integer userId, String status);
+	 public boolean updateUserAccStatus(Integer userId, String status);
 }
