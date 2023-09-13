@@ -19,7 +19,11 @@ public class UserServiceImp implements UserService{
 	public String saveOrUpdateUserAcc(UserAccount userAcc) {
 		
 		Integer userid = userAcc.getUserid();
+		if(userid==null) {
+			userAcc.setActive_Sw("Y");
+		}
 		up.save(userAcc);
+		
 		if(userid==null) {
 			return "Record Saved Successfuly";
 		}

@@ -2,6 +2,7 @@ package com.spring.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,14 +27,13 @@ public class UserAccount {
     private LocalDate DOB;
     private Long SSN;
     private String Active_Sw;
-    public UserAccount() {
-        // Default active state is "Y" when the user is created
-        this.Active_Sw = "Y";
-    }
+    
 
     @CreationTimestamp
+    @Column(updatable=false)
     private LocalDate createdate;
     @UpdateTimestamp
+    @Column(insertable=false)
     private LocalDate updatedate;
 	public Integer getUserid() {
 		return userid;
