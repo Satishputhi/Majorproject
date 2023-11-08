@@ -57,14 +57,7 @@ public class UserServiceImp implements UserService{
 		
 		return false;
 	}
-//	public void toggleUserActivation(Integer id) {
-//        UserAccount user = getUserAcc(id);
-//        if (user != null) {
-//            // Toggle the active state between "Y" and "N"
-//            user.setActive_Sw(user.getActive_Sw().equals("Y") ? "N" : "Y");
-//            up.save(user); // Update the user in the database
-//        }
-//    
+
 	@Override
 	public boolean updateUserAccStatus(Integer userId, String status) {
 		try {
