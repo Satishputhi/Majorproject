@@ -35,7 +35,6 @@ public class UserRestController {
 	}
 
 	@PostMapping("/login")
-
 	public ResponseEntity<LoginResponse> userLogin(@RequestBody LoginRequest request) {
 		LoginResponse response = service.userLogin(request);
 
